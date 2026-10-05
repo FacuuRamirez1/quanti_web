@@ -1,0 +1,214 @@
+﻿{
+    "discovery":  {
+                      "casos_de_uso":  [
+                                           "Como visitante, quiero dejar mi nombre, apellido y email en la landing para enterarme del lanzamiento.",
+                                           "Como visitante, quiero ver el catálogo por categorías sin precios para conocer la oferta.",
+                                           "Como visitante o mayorista, quiero contactar por el formulario genérico o por redes (Instagram/Facebook) para consultar o pedir provisión.",
+                                           "Como admin, quiero ver y filtrar los posibles_clientes desde la Instancia 1.",
+                                           "Como admin, quiero dar de alta, editar, eliminar y categorizar productos (con imágenes) desde la Instancia 2."
+                                       ],
+                      "competitors":  [
+
+                                      ],
+                      "created_by":  "discovery-research",
+                      "funcionalidades_necesarias":  [
+                                                         "Landing Próximamente + form nombre/apellido/email (RF-01/RF-02 modificado)",
+                                                         "DB Postgres vía Supabase con tabla posibles_clientes (RF-03 modificado)",
+                                                         "/admin con Auth+RLS desde Instancia 1: ver y filtrar leads, sin exportación (RF-09 adelantado)",
+                                                         "Infra Hito 1: Vercel + quantihidroponia.com.ar + Supabase + Resend",
+                                                         "Home con carrusel de imágenes de logos, Nosotros, catálogo sin precios, FAQ + form genérico, footer con Instagram/Facebook (RF-04 a RF-08)",
+                                                         "Admin Instancia 2: CRUD productos/categorías con imágenes, mantiene vista y filtrado de leads"
+                                                     ],
+                      "funcionalidades_opcionales":  [
+                                                         "Formulario diferenciado B2B (descartado del MVP)",
+                                                         "Analítica de leads, notificaciones automáticas, multi-idioma"
+                                                     ],
+                      "integraciones":  [
+                                            "Supabase: DB Postgres + Auth + Storage; leads sin exportación a archivos — a crear",
+                                            "Resend (formulario + remitente verificado) — a crear/verificar",
+                                            "Vercel + quantihidroponia.com.ar — a conectar",
+                                            "Instagram, Facebook (enlaces footer); contacto sin WhatsApp"
+                                        ],
+                      "preguntas_abiertas":  [
+                                                 "Acceso registrador/DNS de quantihidroponia.com.ar (responsable, antes de Hito 1)",
+                                                 "Casilla destino del formulario (responsable, para RF-07)",
+                                                 "Remitente verificado Resend (responsable, Hito 1/3)",
+                                                 "¿Filtrar leads más allá de fecha/email/nombre?"
+                                             ],
+                      "problema":  "Quanti vende por redes + contactos sin presencia web propia; necesita posicionar marca y captar interesados (Instancia 1) y luego un sitio institucional con catálogo sin precios y gestión propia (Instancia 2).",
+                      "reglas_de_negocio":  [
+                                                "Fichas sin precios visibles",
+                                                "Leads con nombre/apellido/email obligatorios validados FE+BE",
+                                                "Formulario con campos obligatorios",
+                                                "RBAC /admin por RLS (admin vs superadmin)",
+                                                "Aprobación progresiva por el desarrollador + conformidad liviana del cliente por hito"
+                                            ],
+                      "restricciones":  [
+                                            "6 semanas, 4 hitos",
+                                            "Next.js/React + Tailwind + Framer Motion, SEO SSR",
+                                            "PageSpeed ≥85 móvil, responsive, WCAG 2.1 AA, HTTPS",
+                                            "Figma como guía visual, no maqueta",
+                                            "Leads en DB Postgres vía Supabase, consultados desde /admin; sin exportación a archivos",
+                                            "Solo existe el dominio; sin hosting (deploy en Vercel)"
+                                        ],
+                      "riesgos":  [
+                                      "Hito 1 más pesado que lo estimado en el DRF (cuentas + dominio + Auth/RLS adelantado)",
+                                      "Sin acceso al DNS no hay deploy ni emails (desbloqueador #1)",
+                                      "CRUD con imágenes exige Storage + optimización (Hito 3)",
+                                      "Formulario genérico puede mezclar leads B2B críticos"
+                                  ],
+                      "sources":  [
+                                      "Documento de Requisitos Funcionales (DRF) - Quanti Vegetales Hidropónicos.pdf (v1.0, Julio 2026)",
+                                      "recovery.md (versión actualizada del responsable, 2026-10-02)",
+                                      "Figma guía visual: https://www.figma.com/design/wynTa9TbgQl8LrHFWXhUU5/Quanti-Web?node-id=0-1\u0026t=7hd0ZkeIZu4Z2L9W-1"
+                                  ],
+                      "usuarios":  [
+                                       "Visitante B2C: origen, beneficios, puntos de venta, contacto (form o redes, sin WhatsApp)",
+                                       "Cliente B2B mayorista: catálogo y provisión (mismo formulario genérico)",
+                                       "Admin Quanti: ver/filtrar leads (Inst.1) + CRUD productos/categorías con imágenes (Inst.2)",
+                                       "SuperAdmin Dev: auditoría, soporte, auth, infra"
+                                   ]
+                  },
+    "kb":  {
+               "created_by":  "kb-creator",
+               "discovery":  {
+                                 "domain":  "agritech",
+                                 "needs_infra":  true,
+                                 "problem":  "Venta informal sin presencia web → ecosistema institucional con captura de leads y catálogo gestionable",
+                                 "scale":  "public_multi_user",
+                                 "stack":  "Next.js + React + Tailwind + Framer Motion + Supabase (PostgreSQL/Auth/Storage) + Resend + Vercel",
+                                 "system_type":  "web_app"
+                             },
+               "files":  [
+                             "knowledge-base/01_vision_y_objetivos.md",
+                             "knowledge-base/02_descripcion_general.md",
+                             "knowledge-base/03_actores_y_roles.md",
+                             "knowledge-base/04_modelo_de_datos.md",
+                             "knowledge-base/05_reglas_de_negocio.md",
+                             "knowledge-base/06_funcionalidades.md",
+                             "knowledge-base/07_flujos_principales.md",
+                             "knowledge-base/08_arquitectura_propuesta.md",
+                             "knowledge-base/09_decisiones_y_supuestos.md",
+                             "knowledge-base/10_preguntas_abiertas.md",
+                             "knowledge-base/11_rendimiento_y_accesibilidad.md",
+                             "knowledge-base/README.md"
+                         ],
+               "source":  "interactive"
+           },
+    "owner":  "active-orchestrator",
+      "step":  "done",
+    "registry":  {"created_by":  "skill-registry", "engram_topic_key":  "foundation/registry", "location":  ".atl/skill-registry.md", "project_conventions":  ["CHANGES.md", "knowledge-base/"], "skills_indexed":  9, "skills":  ["vercel-react-best-practices", "supabase-postgres-best-practices", "supabase", "shadcn", "deploy-to-vercel", "vercel-optimize", "frontend-design", "seo-audit", "find-skills"], "updated":  "2026-10-05"},
+     "version":  4,
+    "skills":  {
+                    "installed":  ["vercel-react-best-practices", "supabase-postgres-best-practices", "supabase", "shadcn", "deploy-to-vercel", "vercel-optimize", "frontend-design", "seo-audit"],
+                   "recommended":  [
+                                        {
+                                            "installs":  "771K",
+                                            "name":  "vercel-react-best-practices",
+                                            "source":  "vercel-labs/agent-skills",
+                                            "why":  "React/Next.js best practices from Vercel Engineering — matches Next.js 15 + React core of landing, catalog and /admin."
+                                        },
+                                        {
+                                            "installs":  "431K",
+                                            "name":  "supabase-postgres-best-practices",
+                                            "source":  "supabase/agent-skills",
+                                            "why":  "Postgres schema + RLS best practices — matches posibles_clientes leads table and /admin RBAC (admin vs superadmin)."
+                                        },
+                                        {
+                                            "installs":  "309K",
+                                            "name":  "supabase",
+                                            "source":  "supabase/agent-skills",
+                                            "why":  "Official Supabase guide (DB + Auth + Storage) — matches Auth/RLS leads admin plus product images in Storage (Hito 3)."
+                                        },
+                                        {
+                                            "installs":  "954K",
+                                            "name":  "frontend-design",
+                                            "source":  "anthropics/skills",
+                                            "why":  "Distinctive institutional-grade frontend design — matches brand positioning plus Figma-guided home/catalog/FAQ."
+                                        },
+                                        {
+                                            "installs":  "700K",
+                                            "name":  "web-design-guidelines",
+                                            "source":  "vercel-labs/agent-skills",
+                                            "why":  "Web design guidelines for landing/home quality — matches landing + logos carousel + catalog without prices."
+                                        },
+                                        {
+                                            "installs":  "374K",
+                                            "name":  "vercel-composition-patterns",
+                                            "source":  "vercel-labs/agent-skills",
+                                            "why":  "React composition patterns — matches maintainable catalog/admin components across Instancia 1 and 2."
+                                        },
+                                        {
+                                            "installs":  "272K",
+                                            "name":  "shadcn",
+                                            "source":  "shadcn/ui",
+                                            "why":  "Accessible Tailwind component system — matches lightweight /admin CRUD plus leads filtering speed."
+                                        },
+                                        {
+                                            "installs":  "146K",
+                                            "name":  "deploy-to-vercel",
+                                            "source":  "vercel-labs/agent-skills",
+                                            "why":  "Vercel deploy workflow — matches Vercel + quantihidroponia.com.ar infra (Hito 1, DNS desbloqueador)."
+                                        },
+                                        {
+                                            "installs":  "90K",
+                                            "name":  "vercel-optimize",
+                                            "source":  "vercel-labs/agent-skills",
+                                            "why":  "Next.js-on-Vercel perf optimization — matches PageSpeed >=85 movil plus responsive/WCAG 2.1 AA constraints."
+                                        },
+                                        {
+                                            "installs":  "323K",
+                                            "name":  "emil-design-eng",
+                                            "source":  "emilkowalski/skills",
+                                            "why":  "Design-engineering and motion craft — closest match for Framer Motion carousel plus micro-interactions (no dedicated Framer Motion skill found)."
+                                        },
+                                        {
+                                            "installs":  "220K",
+                                            "name":  "seo-audit",
+                                            "source":  "coreyhaines31/marketingskills",
+                                            "why":  "SEO audit workflow — matches SEO SSR plus institutional discoverability; optional complement."
+                                        },
+                                        {
+                                            "installs":  "49K",
+                                            "name":  "seo",
+                                            "source":  "addyosmani/web-quality-skills",
+                                            "why":  "SEO quality checks from a reputable author — matches SEO SSR requirement; pick one of the two SEO skills."
+                                        },
+                                        {
+                                            "installs":  "67K",
+                                            "name":  "tailwind-design-system",
+                                            "source":  "wshobson/agents",
+                                            "why":  "Tailwind design-system patterns — matches Tailwind styling consistency; secondary to shadcn."
+                                        },
+                                        {
+                                            "installs":  "6.6K",
+                                            "name":  "nextjs-supabase-auth",
+                                            "source":  "sickn33/agentic-awesome-skills",
+                                            "why":  "Next.js + Supabase Auth patterns — matches /admin Auth+RLS; secondary (community source, lower installs)."
+                                        }
+                                    ],
+                    "status":  "8 skills installed globally for opencode (-a opencode -y); install command required non-interactive flags"
+               },
+    "roadmap":  {
+                    "created_by":  "roadmap-generator",
+                    "source":  "CHANGES.md",
+                    "changes":  [
+                                    "C-01",
+                                    "C-02",
+                                    "C-03",
+                                    "C-04",
+                                    "C-05",
+                                    "C-06",
+                                    "C-07",
+                                    "C-08",
+                                    "C-09",
+                                    "C-10",
+                                     "C-11"
+                                 ]
+                 },
+     "agents":  {
+                     "created_by":  "agent-instruction",
+                     "files":  ["AGENTS.md", "CLAUDE.md"],
+                     "reglas_applied":  ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "U1", "U2"]
+                 }
+}
