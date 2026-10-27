@@ -110,7 +110,7 @@ Paso │ Agente A (Backend Core)      │ Agente B (Backend Aux)       │ Agent
 > C-03 y C-04 corren en paralelo tras C-02. C-05 sincroniza y cierra la Instancia 1 desplegable.
 
 ### [C-01] `foundation-infra`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` archivado (2026-10-06 → `openspec/changes/archive/2026-10-06-c-01-foundation-infra/`; spec sync → `openspec/specs/foundation-infra/spec.md`)
 - **Scope**: Scaffolding + infra base del Hito 1 (un producto, dos releases — DD-01)
   - Next.js 15 (App Router) + React + Tailwind v4 + Framer Motion (última estable) + `next/image`; estructura `app/ (publico) + admin + actions + api mínimo / components / lib/supabase + validaciones.ts + clientes.ts / public/clientes/ / supabase/migrations + seed.sql / middleware.ts` según `08`
   - Clientes Supabase `@supabase/ssr` (`lib/supabase/client, server, middleware`) + `.env.example` con `NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY (solo servidor), RESEND_API_KEY, CONTACTO_DESTINO, RESEND_REMITENTE`; service role jamás en cliente
@@ -129,9 +129,9 @@ Paso │ Agente A (Backend Core)      │ Agente B (Backend Aux)       │ Agent
 ---
 
 ### [C-02] `leads-data-model`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` archivado (2026-10-07 → `openspec/changes/archive/2026-10-07-c-02-leads-data-model/`; spec sync → `openspec/specs/leads-data-model/spec.md`; verificado live: migración 001 + correctiva 002 aplicadas en dashboard, bloques A/B/C verdes, tabla en 0 filas)
 - **Scope**: Modelo de captación + roles (base de todo lo demás)
-  - Migración 001: `posibles_clientes (id UUID PK default gen_random_uuid(), nombre TEXT NOT NULL, apellido TEXT NOT NULL, email CITEXT NOT NULL, acepta_politicas BOOLEAN NOT NULL DEFAULT false, politicas_version TEXT, consent_at TIMESTAMPTZ, created_at TIMESTAMPTZ default now())` + `CHECK (nombre <> '' AND apellido <> '')` + `UNIQUE (lower(email))` + índice `created_at DESC`
+  - Migración 001: `posibles_clientes (id BIGINT GENERATED ALWAYS AS IDENTITY PK, nombre TEXT NOT NULL, apellido TEXT NOT NULL, email CITEXT NOT NULL, acepta_politicas BOOLEAN NOT NULL DEFAULT false, politicas_version TEXT, consent_at TIMESTAMPTZ, created_at TIMESTAMPTZ default now())` + `CHECK (nombre <> '' AND apellido <> '')` + índice único `lower(email)` (case-insensitive, implementado como `CREATE UNIQUE INDEX`, no como constraint de columna) + índice `created_at DESC` (corrección archive-time: el scope decía `id UUID … gen_random_uuid()`, vale BIGINT según KB `04` + Overrides del proposal)
   - **NUEVO (mandato fuera de KB)**: columnas de consentimiento (`acepta_politicas`, `politicas_version` p. ej. `v1.0`, `consent_at`); `CHECK (acepta_politicas = true)` a nivel app + constraint DB documentado; sin consentimiento no hay INSERT válido
   - Roles: UNA sola fuente de verdad (decidir en este change y documentar en `09`: `auth.users.user_metadata.role` o tabla `perfiles (id UUID PK→auth.users, role CHECK admin|superadmin)`)
   - RLS: `posibles_clientes` → `INSERT` público solo vía Server Action validada + rate limit; `SELECT` solo `admin/superadmin`; sin `UPDATE/DELETE` público
@@ -148,7 +148,7 @@ Paso │ Agente A (Backend Core)      │ Agente B (Backend Aux)       │ Agent
 ---
 
 ### [C-03] `auth-admin-shell`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` archivado (2026-10-20 → `openspec/changes/archive/2026-10-20-c-03-auth-admin-shell/`; spec sync → `openspec/specs/auth-admin-shell/spec.md` + `openspec/specs/foundation-infra/spec.md`)
 - **Scope**: Autenticación y cáscara protegida del admin (adelantado a Instancia 1 por DD-02)
   - `/admin/login` (pública, solo formulario): email + password → `signInWithPassword`; error genérico sin revelar existencia de usuario; `aria-describedby`/`role="alert"` en errores
   - `middleware.ts` Supabase completo: protege `/admin/*`, crea/refresca cookies `httpOnly`/`secure`, redirige con sesión válida a `/admin`
@@ -170,7 +170,7 @@ Paso │ Agente A (Backend Core)      │ Agente B (Backend Aux)       │ Agent
 > Cierra la Instancia 1 desplegable: landing + políticas + captura con consentimiento + /admin de lectura. Incluye el scope NUEVO de políticas/checkbox (no está en la KB).
 
 ### [C-04] `landing-captura-politicas`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` archivado (2026-10-26 → `openspec/changes/archive/2026-10-26-c-04-landing-captura-politicas/`; spec sync → `openspec/specs/landing-captura-politicas/spec.md` (nuevo))
 - **Scope**: Landing "Próximamente" + captura con consentimiento + políticas (US-001, US-002 + mandato NUEVO)
   - `/` landing: hero con logo, mensaje institucional e imagen de cultivos prioritaria (`priority`+`fetchpriority`, CLS ≤ 0.1), guía Figma (tokens, no pixel-perfect); responsive móvil/tablet/desktop; PageSpeed móvil ≥ 85
   - Formulario: nombre + apellido + email (los 3 obligatorios, validación en tiempo real) + **casilla obligatoria "Acepto las Políticas de Seguridad/Privacidad"** con enlace a las políticas; submit deshabilitado sin checkbox; errores anunciados (`aria-describedby`/`role="alert"`, sin depender solo del color)
@@ -190,7 +190,7 @@ Paso │ Agente A (Backend Core)      │ Agente B (Backend Aux)       │ Agent
 ---
 
 ### [C-05] `admin-leads-view`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` archivado (2026-10-26 → `openspec/changes/archive/2026-10-26-c-05-admin-leads-view/`; spec sync → `openspec/specs/admin-leads-view/spec.md` (nuevo) + `openspec/specs/auth-admin-shell/spec.md` (modificado))
 - **Scope**: Panel de lectura de leads (US-007, US-010 en lo que toca a esta vista)
   - `/admin` (RSC, tras middleware + rol): tabla `posibles_clientes` ordenada `created_at DESC`, paginada; columnas nombre/apellido/email/fecha (+ versión de políticas y fecha de consentimiento como columnas visibles, por el mandato NUEVO)
   - Filtros server-side por fecha/email/nombre (búsqueda en servidor, no en cliente; alcance SU-02 — si piden más filtros, change nuevo)

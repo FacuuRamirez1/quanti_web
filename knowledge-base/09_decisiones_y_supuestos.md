@@ -26,6 +26,9 @@
 ### DD-08 — Sin API REST propia
 **Decisión**: mutaciones solo por Server Actions; integraciones vía SDKs de terceros. **Justificación**: menos superficie que mantener para el alcance actual. **Trade-off**: si aparece una app móvil o terceros, habrá que abrir API.
 
+### DD-09 — Fuente de roles: tabla perfiles
+**Decisión**: el rol se resuelve exclusivamente desde la tabla `perfiles` (`id UUID → auth.users ON DELETE CASCADE`, `role CHECK admin|superadmin`); ninguna autorización se basa en `auth.users.user_metadata`. **Contexto**: C-02 necesitaba cerrar la fuente de roles antes de que C-03 (login) y C-05 (/admin) la consuman. **Alternativas**: `user_metadata.role` descartado — `raw_user_meta_data` es editable por el propio usuario y aparece en el JWT (checklist de seguridad Supabase); además los claims JWT quedan stale hasta el refresh. **Justificación**: `perfiles` es server-controlled, auditable y se resuelve por query en cada policy (sin staleness); coincide con el ERD de `04_modelo_de_datos.md`. **Trade-off**: `app_metadata` como evolución futura (claims seguros dentro del JWT vía hooks) — no es default en este change.
+
 ## Supuestos inferidos
 
 ### SU-01 — Link admin discreto en footer
@@ -34,8 +37,8 @@
 ### SU-02 — Filtro de leads = fecha/email/nombre, búsqueda en servidor
 **Supuesto**: sin búsqueda avanzada ni paginación compleja. **Origen**: Discovery (pregunta abierta pendiente). **Riesgo si es falso**: retrabajo del /admin en Hito 2. **Cómo validar**: confirmar antes de codificar US-007.
 
-### SU-03 — Roles por metadata o `perfiles` (una sola fuente)
-**Supuesto**: alcanza con dos roles sin jerarquías. **Origen**: RBAC simple del DRF. **Riesgo si es falso**: re-modelar auth. **Cómo validar**: decisión técnica Hito 1, documentarla acá.
+### SU-03 — Roles por metadata o `perfiles` (una sola fuente) — CERRADO por DD-09
+**Supuesto**: alcanza con dos roles sin jerarquías. **Origen**: RBAC simple del DRF. **Riesgo si es falso**: re-modelar auth. **Cómo validar**: decisión técnica Hito 1, documentarla acá. **Resolución (C-02)**: fuente única = tabla `perfiles` (ver DD-09).
 
 ### SU-04 — Aprobación progresiva sin fricción
 **Supuesto**: el esquema "aprueba el desarrollador por tarea" + conformidad liviana del cliente por hito evita bloqueos. **Origen**: respuesta del responsable. **Riesgo si es falso**: el cronograma de 6 semanas se corre. **Cómo validar**: dejar el esquema por escrito al arrancar Hito 1.

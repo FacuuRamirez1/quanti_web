@@ -1,32 +1,70 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+# Project context
+context: |
+  Tech stack: Next.js 15 (App Router) + React + TypeScript + Tailwind CSS v4 + Framer Motion
+  Database: PostgreSQL 15+ via Supabase (Auth + Storage + Realtime + Edge Functions)
+  Email: Resend
+  Deploy: Vercel + quantihidroponia.com.ar
+  Domain: E-commerce vegetales hidropónicos (B2C)
+  Instancia 1: Landing + Catálogo + Formulario Leads (checkbox políticas obligatorio + página /politicas + registro consentimiento)
+  Instancia 2: Checkout + Panel Admin + Gestión Leads
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Key constraints (Reglas Duras):
+  - R1: No Supabase queries direct from Client Components
+  - R2: Strict typing + Zod schemas shared front/back, no `any`
+  - R3: No secrets in client (service_role, RESEND_API_KEY server-only)
+  - R4: No prices anywhere (RN-CAT-01)
+  - R5: No lead exports to files — admin only (RN-LEAD-04)
+  - R6: next/image with real sizes + Storage optimized
+  - R7: No WhatsApp on site — form + Instagram/Facebook only (RN-FORM-03)
+  - R8: Animations only transform/opacity + prefers-reduced-motion (RN-CONT-03)
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+  Knowledge base: knowledge-base/ (12 files: 01_vision → 11_rendimiento)
+  Roadmap: CHANGES.md (11 changes C-01…C-11, 4 fases, critical path I1→I2)
+
+# Per-artifact rules
+rules:
+  proposal:
+    - Reference CHANGES.md change ID and dependencies
+    - Include "Non-goals" section
+    - Link to relevant KB files (Leer antes)
+    - Max 800 words
+  design:
+    - Reference proposal decisions
+    - Include data model changes (if any) with migration strategy
+    - Include API contracts (Server Actions / Route Handlers)
+    - Include RLS policy changes (if backend)
+    - Include UI/UX decisions with accessibility notes (WCAG 2.1 AA)
+  tasks:
+    - Break into max 2-hour chunks
+    - Each task references spec scenario(s) from design
+    - Order respects dependencies
+    - Mark test layer (unit/integration/e2e) per task
+  specs:
+    - Delta specs only (changes from main specs)
+    - Use Gherkin-style scenarios for acceptance criteria
+    - Link to main spec capability being modified
+
+# Per-operation guidance
+operations:
+  apply:
+    guidance:
+      - Strict TDD Mode: RED → GREEN → TRIANGULATE (≥2 cases) → REFACTOR per task
+      - Safety net: run existing tests first, capture baseline
+      - Load domain skills before implementing (frontend/backend/deploy)
+      - Follow governance level for domain (CRITICAL/HIGH/MEDIUM/LOW)
+      - Save decisions to engram with topic_key: "opsx/{change-name}/apply"
+  archive:
+    guidance:
+      - Verify all tasks [x] and tests passing
+      - Run npm run build before archiving
+      - Sync delta specs to main specs (openspec sync)
+      - Mark [x] in CHANGES.md
+      - Save summary to engram with topic_key: "opsx/{change-name}/archive"
+  explore:
+    guidance:
+      - Read relevant KB files first
+      - Check CHANGES.md for related changes
+      - Surface open questions from 10_preguntas_abiertas.md
+      - No implementation — thinking partner only

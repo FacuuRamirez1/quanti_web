@@ -17,7 +17,7 @@ posibles_clientes (tabla independiente, sin FKs)
 ## Entidades
 
 ### posibles_clientes
-- Atributos: `id UUID PK default gen_random_uuid()`, `nombre TEXT NOT NULL`, `apellido TEXT NOT NULL`, `email CITEXT NOT NULL`, `created_at TIMESTAMPTZ default now()`.
+- Atributos: `id BIGINT GENERATED ALWAYS AS IDENTITY PK`, `nombre TEXT NOT NULL`, `apellido TEXT NOT NULL`, `email CITEXT NOT NULL`, `acepta_politicas BOOLEAN NOT NULL DEFAULT false`, `politicas_version TEXT`, `consent_at TIMESTAMPTZ`, `created_at TIMESTAMPTZ default now()`.
 - Relaciones: ninguna.
 - Constraints: `CHECK (nombre <> '' AND apellido <> '')`, `UNIQUE (lower(email))` — el email no se puede duplicar; formato de email validado en app (front + Server Action).
 - Índices: `created_at DESC` (filtrado por fecha en /admin).
