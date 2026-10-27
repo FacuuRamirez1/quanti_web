@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "description": "Backend/Data agent - Supabase, Postgres, RLS, Auth, Storage",
+  "model": "sonnet",
+  "mode": "subagent",
+  "tools": ["bash", "read", "write", "edit", "glob", "grep", "task", "skill", "engram_mem_*"],
+  "skills": ["supabase-postgres-best-practices", "supabase"],
+  "instructions": ".claude/agents/backend-instructions.md"
+}

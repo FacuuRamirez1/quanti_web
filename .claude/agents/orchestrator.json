@@ -1,0 +1,8 @@
+{
+  "name": "sdd-orchestrator",
+  "description": "OPSX Orchestrator - Coordinates changes via openspec CLI, delegates to sub-agents",
+  "model": "opus",
+  "mode": "primary",
+  "tools": ["bash", "read", "write", "edit", "glob", "grep", "task", "skill", "engram_mem_*"],
+  "instructions": ".claude/agents/orchestrator-instructions.md"
+}

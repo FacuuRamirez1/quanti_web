@@ -1,0 +1,9 @@
+{
+  "name": "deploy",
+  "description": "Deploy/Perf/SEO agent - Vercel, performance, auditoría SEO",
+  "model": "sonnet",
+  "mode": "subagent",
+  "tools": ["bash", "read", "write", "edit", "glob", "grep", "task", "skill", "engram_mem_*"],
+  "skills": ["deploy-to-vercel", "vercel-optimize", "seo-audit"],
+  "instructions": ".claude/agents/deploy-instructions.md"
+}

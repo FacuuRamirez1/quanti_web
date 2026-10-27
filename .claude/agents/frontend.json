@@ -1,0 +1,9 @@
+{
+  "name": "frontend",
+  "description": "Frontend agent - Next.js/React/Tailwind, landing, catálogo, /admin UI",
+  "model": "sonnet",
+  "mode": "subagent",
+  "tools": ["bash", "read", "write", "edit", "glob", "grep", "task", "skill", "engram_mem_*"],
+  "skills": ["vercel-react-best-practices", "frontend-design", "shadcn"],
+  "instructions": ".claude/agents/frontend-instructions.md"
+}
