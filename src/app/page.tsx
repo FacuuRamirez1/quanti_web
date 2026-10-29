@@ -112,11 +112,7 @@ export default function Home() {
             ¡Gracias por tu paciencia!
           </p>
 
-          {/* Separadores blancos en todos los breakpoints (bordes por ítem;
-              `divide-*` no sirve en la grilla 2×2 de tablet):
-              mobile 1 col → líneas horizontales entre ítems;
-              sm 2×2 → vertical entre columnas + horizontal entre filas;
-              lg 1×4 → verticales entre ítems. */}
+          
           <ul className="mx-auto m-30 grid max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {PILARES.map((pilar) => (
               <li
