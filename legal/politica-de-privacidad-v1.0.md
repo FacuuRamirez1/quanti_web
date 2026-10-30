@@ -8,7 +8,7 @@
 
 - **Razón social**: QUANTI VEGETALES HIDROPÓNICOS
 - **Domicilio**: Mendoza, República Argentina
-- **Email de contacto para privacidad**: contacto@quanti.com.ar
+- **Email de contacto para privacidad**: contacto@quantihidroponia.com.ar
 
 ## 2. Datos que recolectamos
 
@@ -41,7 +41,7 @@ Conservamos tus datos mientras dure la etapa de lanzamiento y por un plazo máxi
 
 El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto conforme lo establecido en el artículo 14, inciso 3 de la Ley Nº 25.326.
 
-Para ejercer tus derechos de acceso, rectificación, actualización o supresión, escribí a **contacto@quanti.com.ar** indicando tu email registrado. Responderemos dentro de los plazos legales (10 días hábiles para acceso; 5 días hábiles para rectificación o supresión).
+Para ejercer tus derechos de acceso, rectificación, actualización o supresión, escribí a **contacto@quantihidroponia.com.ar** indicando tu email registrado. Responderemos dentro de los plazos legales (10 días hábiles para acceso; 5 días hábiles para rectificación o supresión).
 
 > **La AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA**, Órgano de Control de la Ley Nº 25.326, tiene la atribución de atender las denuncias y reclamos que se interpongan con relación al incumplimiento de las normas sobre protección de datos personales.
 

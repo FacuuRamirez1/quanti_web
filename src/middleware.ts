@@ -1,8 +1,10 @@
 /**
  * Middleware de sesión — C-03 auth-admin-shell (reemplaza stub C-01).
  *
- * - Solo verifica SESIÓN (barato, edge): `updateSession` refresca cookies
- *   `httpOnly`/`secure` en cada request; `getUser()` decide la redirección
+ * - Solo verifica SESIÓN (barato, edge): `updateSession` refresca las cookies
+ *   de sesión en cada request, emitidas con `httpOnly`/`secure`/`SameSite=Lax`
+ *   vía `SESSION_COOKIE_OPTIONS` (`lib/supabase/cookie-options.ts`); al copiarlas
+ *   a un redirect se conservan sus atributos. `getUser()` decide la redirección
  *   (verdad server, no claims cacheados). El ROL vive en
  *   `src/app/admin/layout.tsx` vía `requireRole()` (una query a `perfiles` por
  *   render, 403 sin filtrar datos).

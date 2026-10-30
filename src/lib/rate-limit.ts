@@ -110,7 +110,7 @@ export function checkLoginRateLimit(
     if (entry.count >= MAX_REAL_ATTEMPTS) {
       // 5.º+ dentro de la ventana (4 fallos reales ya acumulados, o bloqueo
       // expirado con cuenta alta): se rechaza SIN llamar a Auth y se escala
-      // el backoff (5.º→2 min, 6.º→10 min, 7.º+→30 min).
+      // el backoff (5.º→15 min, 6.º→20 min, 7.º→25 min, 8.º→30 min, +5 min c/u).
       entry.count += 1;
       entry.blockedUntil = now + blockForMs(entry.count);
       store.set(key, entry);
@@ -173,7 +173,7 @@ export function __rateLimitReset(): void {
 //
 // Extiende ESTE módulo (no lo duplica): comparte mecánica con el login
 // (Map in-memory, ventana deslizante de 10 min, clave dual IP+email
-// normalizadas, backoff 2/10/30 min) con umbrales propios de formulario
+// normalizadas, backoff 15/20/25/30 min +5 c/u) con umbrales propios de formulario
 // público: 5 envíos/10 min por IP+email (el login es más estricto por ser
 // credential-stuffing; el lead es freno anti-spam).
 //
@@ -199,7 +199,8 @@ function leadKeyFor(kind: "ip" | "email", value: string): string {
 /**
  * Pre-chequeo (ANTES del INSERT). Si alguna clave lead está bloqueada, o el
  * intento cae 6.º+ dentro de la ventana (5 envíos ya acumulados), lo rechaza
- * y escala el backoff (6.º→2 min, 7.º→10 min, 8.º+→30 min, alineado al login
+ * y escala el backoff (6.º→15 min, 7.º→20 min, 8.º→25 min, 9.º→30 min, +5 min
+ * c/u, alineado al login
  * restando el offset de umbral).
  * Efecto lateral: solo escribe ante un intento que RESULTA bloqueado.
  */
@@ -213,7 +214,7 @@ export function checkLeadRateLimit(
   let longestRemaining = 0;
 
   // Offset para reutilizar la escala del login: el 6.º envío de leads
-  // equivale al 5.º intento de login (primer escalón: 2 min).
+  // equivale al 5.º intento de login (primer escalón: 15 min).
   const toLoginOrdinal = (leadCount: number): number =>
     leadCount - (MAX_LEAD_SENDS - MAX_REAL_ATTEMPTS);
 

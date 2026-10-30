@@ -4,7 +4,7 @@
  * spec visual donde divergen (checkbox `acepta_politicas` + honeypot + action
  * `registrarLead` intactos; ver divergencias abajo).
  *
- * A. Hero full-bleed: `Quanti-4.webp` (1080x720) `fill` + `object-cover` con
+ * A. Hero full-bleed: `Quanti-5.webp` `fill` + `object-cover` con
  *    overlay exacto `rgba(0,0,0,.45)`; logo blanco centrado; h1 ÚNICO
  *    "Estamos trabajando en algo increíble" (`increíble` en #689F38);
  *    subtítulo; grilla de 4 pilares con divisores verticales (solo `lg`,
@@ -14,7 +14,7 @@
  *    título ("Nosotros" en verde + subrayado corto), 2 párrafos verbatim de la
  *    spec e IG/FB (sin URLs propias en el repo: dominios raíz provisorios);
  *    derecha `Quanti-9.webp` rounded + `object-cover`.
- * C. `FooterNegro`: fondo negro + "Admin" → `/admin`.
+ * C. `FooterNegro`: fondo negro + texto de derechos reservados.
  *
  * Accesibilidad (C-03 3.4 + spec §4): `lang="es"` + skip-link + `main` en el
  * root layout; hovers solo transform/opacity (+ `prefers-reduced-motion` en
@@ -97,7 +97,7 @@ export default function Home() {
             width={1254}
             height={565}
             sizes="(max-width: 640px) 724px, (max-width: 868px) 788px, 620px"
-            className="mx-auto mt-7 h-auto w-86rounded-2xl object-contain sm:w-120 md:w-140"
+            className="mx-auto mt-7 h-auto w-86 rounded-2xl object-contain sm:w-120 md:w-140"
           />
           <h1
             id="titulo"
@@ -203,7 +203,7 @@ export default function Home() {
           </div>
           <div className="md:pl-10">
             <Image
-              src="/Quanti-9.webp"
+              src="/Quanti-9.jpeg"
               alt="Interior del invernadero hidropónico de Quanti"
               width={8500}
               height={3542}

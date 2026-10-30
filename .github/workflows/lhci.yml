@@ -15,4 +15,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        # Placeholders que pasan el schema de src/lib/env.ts (validado en
+        # import y / se prerenderiza en build). No son secretos reales:
+        # LHCI solo mide la landing pública.
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
+          SUPABASE_SERVICE_ROLE_KEY: placeholder-service-role-key
+          RESEND_API_KEY: placeholder-resend-key
+          CONTACTO_DESTINO: contacto@quantihidroponia.com.ar
+          RESEND_REMITENTE: no-reply@quantihidroponia.com.ar
       - run: npx @lhci/cli autorun

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 // Verde de texto chico oscurecido a #558024 (4.67:1 sobre blanco, AA).
-const EMAIL_CONTACTO = "contacto@quanti.com.ar";
+const EMAIL_CONTACTO = "contacto@quantihidroponia.com.ar";
 
 function EmailContacto() {
   return (

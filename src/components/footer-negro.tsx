@@ -1,11 +1,10 @@
 /**
  * Footer negro compartido de rutas públicas — spec "Landing Próximamente" §C.
  *
- * Server Component puro (R1): texto centrado + enlace discreto "Admin" → `/admin`
- * (criterio C-03 3.4; el middleware redirige a `/admin/login` sin sesión).
- * Sin precios (R4), sin WhatsApp (R7); hover solo opacity/underline (R8).
+ * Server Component puro (R1): solo texto centrado de derechos reservados.
+ * Sin enlace al admin por ahora (el acceso es directo por `/admin/login`).
+ * Sin precios (R4), sin WhatsApp (R7).
  */
-import Link from "next/link";
 
 /** `compact`: franja fina (diseño del login admin). */
 export function FooterNegro({ compact = false }: { compact?: boolean }) {

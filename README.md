@@ -18,7 +18,7 @@ Plataforma web desarrollada para la captación y gestión segura de interesados 
 - **Autenticación y guardia de roles**: login mediante Supabase Auth, con resolución de roles aislada estrictamente en la tabla `perfiles` (se descartan los metadatos de usuario).
 - **Defensas anti-abuso en el login**:
   - Campo *honeypot* invisible para detección de bots, con respuesta genérica byte-idéntica.
-  - Rate-limiting en servidor con clave dual (IP / email) y *backoff* progresivo (bloqueos de 2, 10 y 30 minutos).
+  - Rate-limiting en servidor con clave dual (IP / email) y *backoff* progresivo (bloqueos de 15, 20, 25 y 30 minutos, +5 min por cada intento adicional).
 - **Doble defensa de datos (Double-Guard)**: verificación de roles en servidor previa a las consultas, combinada con las políticas de seguridad a nivel de filas (RLS) de Supabase.
 
 ---
