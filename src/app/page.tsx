@@ -7,8 +7,8 @@
  * A. Hero full-bleed: `Quanti-5.webp` `fill` + `object-cover` con
  *    overlay exacto `rgba(0,0,0,.45)`; logo blanco centrado; h1 ÚNICO
  *    "Estamos trabajando en algo increíble" (`increíble` en #689F38);
- *    subtítulo; grilla de 4 pilares con divisores verticales (solo `lg`,
- *    donde es una sola fila); form card glassmorphism
+ *    subtítulo; grilla de 4 pilares con divisores finos (1 col en mobile,
+ *    2x2 en tablet, 4 cols en `lg`); form card glassmorphism
  *    (`rgba(255,255,255,.18)` + `backdrop-blur-md`) con `LeadForm`.
  * B. About `bg #E5E7EB`: 2 columnas con divisor vertical fino; izquierda con
  *    título ("Nosotros" en verde + subrayado corto), 2 párrafos verbatim de la
@@ -43,6 +43,15 @@ const PILARES = [
     titulo: "Saludables",
     descripcion: "Alimentos naturales, sin pesticidas ni químicos.",
   },
+] as const;
+
+// Divisores finos por índice (sin gap, así el texto queda centrado entre líneas):
+// mobile = líneas horizontales; tablet = cruz 2x2; desktop = verticales.
+const BORDES_PILAR = [
+  "",
+  "max-md:border-t md:border-l",
+  "max-lg:border-t lg:border-l",
+  "max-lg:border-t md:border-l",
 ] as const;
 
 function IconoInstagram() {
@@ -90,34 +99,34 @@ export default function Home() {
           aria-hidden="true"
           className="absolute inset-0 bg-[rgba(0,0,0,0.70)]"
         />
-        <div className="relative mx-auto w-full max-w-7xl px-4 pb-14 sm:px-6 md:pb-20 lg:px-8">
+        <div className="relative mx-auto w-full max-w-7xl px-4 pb-14 lg:px-8 lg:pb-20">
           <Image
             src="/quanti-logo.png"
             alt="Logotipo de Quanti — Vegetales Hidropónicos"
             width={1254}
             height={565}
-            sizes="(max-width: 640px) 724px, (max-width: 868px) 788px, 620px"
-            className="mx-auto mt-7 h-auto w-86 rounded-2xl object-contain sm:w-120 md:w-140"
+            sizes="(max-width: 1023px) 724px, 620px"
+            className="mx-auto mt-7 h-auto w-86 rounded-2xl object-contain lg:w-140"
           />
           <h1
             id="titulo"
-            className="mt-8 text-center text-4xl font-bold tracking-tight md:text-6xl"
+            className="mt-8 text-center text-4xl font-bold tracking-tight lg:text-6xl"
           >
             Estamos trabajando en algo{" "}
             <span className="text-[#689F38]">increíble</span>
           </h1>
-          <p className="mt-4 text-center text-lg text-white/90 md:text-xl">
+          <p className="mt-4 text-center text-lg text-white/90 lg:text-xl">
             Nuestra página web estará disponible muy pronto
             <br />
             ¡Gracias por tu paciencia!
           </p>
 
           
-          <ul className="mx-auto m-30 grid max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {PILARES.map((pilar) => (
+          <ul className="mx-auto m-24 grid max-w-5xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            {PILARES.map((pilar, i) => (
               <li
                 key={pilar.titulo}
-                className="border-white/25 px-2 py-6 text-center not-first:border-t first:pt-0 last:pb-0 sm:px-6 sm:even:border-l sm:nth-2:border-t-0 sm:nth-2:pt-0 sm:nth-3:pb-0 lg:not-first:border-t-0 lg:py-0 lg:not-first:border-l"
+                className={`border-white/25 px-2 py-4 text-center max-md:first:pt-0 max-md:last:pb-0 md:px-6 md:py-6 lg:py-2 ${BORDES_PILAR[i]}`}
               >
                 <p className="text-lg font-semibold">{pilar.titulo}</p>
                 <p className="mt-2 text-sm font-light leading-relaxed text-white">
@@ -129,11 +138,11 @@ export default function Home() {
 
           <div
             id="aviso"
-            className="mx-auto mt-12 max-w-2xl scroll-mt-8 rounded-2xl border border-white/25 bg-[rgba(255,255,255,0.18)] p-6 shadow-2xl backdrop-blur-md sm:p-8"
+            className="mx-auto mt-12 max-w-2xl scroll-mt-8 rounded-2xl border border-white/25 bg-[rgba(255,255,255,0.18)] p-6 shadow-2xl backdrop-blur-md lg:p-8"
           >
             <h2
               id="titulo-aviso"
-              className="text-center text-lg font-semibold md:text-xl"
+              className="text-center text-lg font-semibold lg:text-xl"
             >
               Dejanos tus datos y te avisamos cuando estemos online.
             </h2>
@@ -148,11 +157,11 @@ export default function Home() {
         aria-labelledby="titulo-nosotros"
         className="bg-[#E5E7EB] text-[#1F2937]"
       >
-        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:divide-x md:divide-[#9CA3AF] md:py-24 lg:px-8">
-          <div className="md:pr-10">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 md:px-12 lg:grid-cols-2 lg:divide-x lg:divide-[#9CA3AF] lg:py-24 lg:px-8">
+          <div className="lg:pr-10">
             <h2
               id="titulo-nosotros"
-              className="text-3xl font-bold tracking-tight md:text-4xl"
+              className="text-3xl font-bold tracking-tight lg:text-4xl"
             >
               Sobre <span className="text-[#689F38]">Nosotros</span>
             </h2>
@@ -160,11 +169,11 @@ export default function Home() {
               aria-hidden="true"
               className="mt-3 block h-1 w-16 rounded-full bg-[#689F38]"
             />
-            <p className="mt-6 text-base leading-relaxed md:text-lg">
+            <p className="mt-6 text-base leading-relaxed lg:text-start lg:text-lg">
               Quanti es una empresa dedicada al cultivo de vegetales hidropónicos
               de alta calidad.
             </p>
-            <p className="mt-4 text-base leading-relaxed md:text-lg">
+            <p className="mt-4 text-base leading-relaxed lg:text-start lg:text-lg">
               Utilizamos tecnología y prácticas sustentables para ofrecer
               productos frescos, nutritivos y amigables con el medio ambiente.
             </p>
@@ -201,14 +210,14 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          <div className="md:pl-10">
+          <div className="lg:pl-10">
             <Image
               src="/Quanti-9.jpeg"
               alt="Interior del invernadero hidropónico de Quanti"
               width={8500}
               height={3542}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="h-72 w-full rounded-2xl object-cover md:h-full md:min-h-24rem"
+              sizes="(max-width: 1023px) 100vw, 50vw"
+              className="h-72 w-full rounded-2xl object-cover lg:h-full lg:min-h-24rem"
             />
           </div>
         </div>

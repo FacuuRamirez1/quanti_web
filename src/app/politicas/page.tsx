@@ -33,7 +33,7 @@ function EmailContacto() {
   return (
     <a
       href={`mailto:${EMAIL_CONTACTO}`}
-      className="text-[#558024] underline underline-offset-2 transition-opacity duration-200 hover:opacity-80"
+      className="text-[#558024] underline underline-offset-2 wrap-anywhere transition-opacity duration-200 hover:opacity-80"
     >
       {EMAIL_CONTACTO}
     </a>
@@ -73,29 +73,29 @@ export default function PoliticasPage() {
         </Link>
       </header>
 
-      <div className="px-4 pt-10 pb-16 sm:px-6 md:pt-16 md:pb-24">
+      <div className="px-4 pt-8 pb-12 sm:px-6 md:pt-12 md:pb-20 lg:pt-16 lg:pb-24">
         <article
           aria-labelledby="titulo-politicas"
-          className="mx-auto w-full max-w-6xl rounded-2xl bg-white px-5 pt-8 shadow-2xl shadow-black/40 sm:px-10 md:pt-10"
+          className="mx-auto w-full max-w-6xl rounded-2xl bg-white px-5 pt-8 shadow-2xl shadow-black/40 sm:px-8 md:px-10 md:pt-10"
         >
-          <header className="pb-8 text-center md:pb-10">
+          <header className="pb-6 text-center md:pb-10">
             <h1
               id="titulo-politicas"
-              className="inline-block border-b-2 border-[#689F38]/50 pb-1 text-3xl font-semibold tracking-tight text-neutral-950 md:text-4xl"
+              className="inline-block border-b-2 border-[#689F38]/50 pb-1 text-[1.75rem] leading-tight font-semibold tracking-tight text-neutral-950 sm:text-3xl lg:text-4xl"
             >
               Política de <span className="text-[#5e8f2a]">Privacidad</span>
             </h1>
-            <p className="mt-2 text-xs font-semibold text-neutral-950 md:text-sm">
+            <p className="mt-2 text-sm font-semibold text-neutral-950">
               Quanti Vegetales Hidropónicos
             </p>
-            <p className="mt-2 text-xs text-neutral-600">
+            <p className="mt-2 text-xs text-neutral-600 sm:text-sm">
               Versión {POLITICAS_VERSION} · Vigencia desde{" "}
               {POLITICAS_EFFECTIVE_DATE}
             </p>
           </header>
 
           <PoliticaSeccion numero={1} titulo="Responsable del tratamiento">
-            <ul className="list-disc space-y-1 pl-6">
+            <ul className="list-disc space-y-1.5 pl-5">
               <li>
                 <strong className="font-semibold">Razón social:</strong>{" "}
                 <span className="text-[#558024]">
@@ -123,7 +123,7 @@ export default function PoliticasPage() {
                 A través del formulario de la landing &ldquo;Próximamente&rdquo;
                 recolectamos únicamente:
               </p>
-              <ul className="mt-1 list-disc space-y-1 pl-6">
+              <ul className="mt-1.5 list-disc space-y-1.5 pl-5">
                 <li>Nombre y apellido.</li>
                 <li>Dirección de correo electrónico.</li>
                 <li>
@@ -241,9 +241,13 @@ export default function PoliticasPage() {
           <PoliticaSeccion numero={9} titulo="Cambios de esta política">
             <p>
               Si actualizamos esta política publicaremos la nueva versión en
-              esta misma ruta (<code>/politicas</code>). Cada registro queda
+              esta misma ruta (<code className="font-[inherit]">/politicas</code>). Cada registro queda
               irrevocablemente vinculado a la versión aceptada al momento del
-              envío (<code>politicas_version = {POLITICAS_VERSION}</code>),
+              envío (
+              <code className="font-[inherit] wrap-anywhere">
+                politicas_version = {POLITICAS_VERSION}
+              </code>
+              ),
               garantizando que un cambio futuro de texto no modifique
               retroactivamente las condiciones bajo las cuales prestaste tu
               consentimiento.

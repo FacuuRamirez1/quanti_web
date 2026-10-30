@@ -11,7 +11,7 @@ export function FooterNegro({ compact = false }: { compact?: boolean }) {
   return (
     <footer className="bg-black text-white">
       <p
-        className={`mx-auto w-full max-w-7xl px-4 text-center text-sm sm:px-6 lg:px-8 ${
+        className={`mx-auto w-full max-w-7xl px-4 text-center text-sm lg:px-8 ${
           compact ? "py-2 text-white" : "py-6 text-white/80"
         }`}
       >

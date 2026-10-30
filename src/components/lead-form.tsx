@@ -99,7 +99,7 @@ export function LeadForm() {
           </Alert>
         ) : null}
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-2">
           <Field data-invalid={!!nombreErrors?.length || undefined}>
             <FieldLabel htmlFor="lead-nombre" className="text-white">
               Nombre
